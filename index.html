@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Static Template</title>
+    <style>
+      img {
+        width: 400px;
+      }
+      body {
+        background-image: linear-gradient(
+          to right,
+          rgba(55, 91, 105, 0.418),
+          rgba(255, 192, 203, 0.445),
+          rgba(172, 101, 101, 0.452),
+          rgba(88, 48, 48, 0.452),
+          rgba(71, 56, 56, 0.459),
+          rgba(65, 92, 102, 0.356),
+          rgba(135, 121, 124, 0.445)
+        );
+      }
+    </style>
+  </head>
+  <body>
+    <div id="inhalt"></div>
+
+    <script>
+      const i = document.getElementById("inhalt");
+      function f1(a) {
+        let sameln = "";
+        sameln += `<p>${a.titel}</p>`;
+        sameln += `<p>${a.gewinn}</p>`;
+        for (let x of a.details) {
+          sameln += `<p>${x}</p>`;
+        }
+        return sameln;
+      }
+
+      function f2(a) {
+        return `<p>${a[0].zahl1} +${a[0].zahl2}+ ${a[0].zahl3}=${
+          a[0].zahl1 + a[0].zahl2 + a[0].zahl3
+        }</p>
+             <p>${a[0].zahl1} - ${a[0].zahl2} - ${a[0].zahl3}=${
+          a[0].zahl1 - a[0].zahl2 - a[0].zahl3
+        }</p>
+             <p>${a[0].zahl1} * ${a[0].zahl2} * ${a[0].zahl3}=${
+          a[0].zahl1 * a[0].zahl2 * a[0].zahl3
+        }</p>
+             <p>${a[0].zahl1} / ${a[0].zahl2} / ${a[0].zahl3}=${
+          a[0].zahl1 / a[0].zahl2 / a[0].zahl3
+        }</p>
+        <h3>${a[1][0]}</h3><img src="${a[1][1]}">`;
+      }
+      function f3(a) {
+        return `
+               <p>${a[0]} + ${a[1]} + ${a[2]}+ ${a[3]} = ${
+          a[0] + a[1] + a[2] + a[3]
+        }</p>
+               <ul>
+                 <li>${a[4]}</li>
+                 <li>${a[5]}</li>
+               </ul>`;
+      }
+
+      const test = (a, b) => {
+        if (typeof b === "function") i.innerHTML += b(a);
+      };
+      console.log("test");
+      //strg + k and strg + c
+      //strg + k and strg + u
+
+      test(
+        {
+          titel: "arabisch länder",
+          gewinn: "26",
+          details: ["marokko", "ägypten", "syrien", "tunisien", "jorden"]
+        },
+        f1
+      );
+
+      test(
+        [
+          {
+            zahl1: 25,
+            zahl2: 10,
+            zahl3: 5
+          },
+          [
+            "marokko ist schones arabich land",
+            "https://www.dena.de/fileadmin/dena/Bilder/Newsroom/Veranstaltungen/2019/Business2Government_Dialoge__BETD_/chefchaouen_marokko.jpg"
+          ]
+        ],
+        f2
+      );
+      test([4, 6, 8, 10, "ägypten", "mutter auf den welt"], f3);
+    </script>
+  </body>
+</html>
